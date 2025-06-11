@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна & Алексей - Приглашение на свадьбу</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --ivory: #fffff0;
+            --rose: #f8d7da;
+            --dark: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--ivory);
+            color: var(--dark);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path d="M20,20 Q50,5 80,20 Q95,50 80,80 Q50,95 20,80 Q5,50 20,20Z" fill="none" stroke="rgba(212, 175, 55, 0.1)" stroke-width="0.5"/></svg>');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Герой-баннер */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: 
+                linear-gradient(rgba(0,0,0,0.2), 
+                url('https://placehold.co/1200x800/FFFFF0/D4AF37?text=Главное+фото') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            color: white;
+            z-index: 2;
+            padding: 20px;
+        }
+        
+        .names {
+            font-size: 5.5rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: fadeIn 2s ease;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 8px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+        
+        .divider {
+            width: 200px;
+            height: 2px;
+            background: white;
+            margin: 30px auto;
+        }
+        
+        .date {
+            font-size: 2.2rem;
+            margin-top: 20px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Приглашение */
+        .invitation {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 80px 50px;
+            margin: -100px auto 80px;
+            border-radius: 10px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .invitation-text {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-top: 40px;
+        }
+        
+        /* Таймер */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 120px;
+            transition: transform 0.3s;
+        }
+        
+        .countdown-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 80px 0;
+        }
+        
+        .gallery-item {
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Детали */
+        .details {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .detail-item {
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .detail-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .detail-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .detail-text {
+            font-size: 1.1rem;
+        }
+        
+        /* Форма */
+        .rsvp-section {
+            background: linear-gradient(rgba(0,0,0,0.7)), url('https://placehold.co/1200x600/FFFFF0/D4AF37?text=Фон+формы') center/cover;
+            padding: 100px 20px;
+            margin: 80px 0;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+        }
+        
+        .rsvp-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 40px auto 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .form-title {
+            color: var(--gold);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        button {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 40px auto 0;
+            font-family: inherit;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        button:hover {
+            background: #b8860b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            margin-top: 80px;
+        }
+        
+        .footer-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+        
+        .contacts {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .contact-name {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        .map {
+            height: 300px;
+            background: #eee;
+            margin: 50px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: url('https://placehold.co/900x300/333/fff?text=Карта+локации') center/cover;
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .names {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+            
+            .date {
+                font-size: 1.8rem;
+            }
+            
+            .invitation {
+                padding: 50px 20px;
+                margin: -80px auto 60px;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .countdown-item {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="names">Анна & Алексей</h1>
+            <div class="subtitle">Приглашают разделить с нами наш особенный день</div>
+            <div class="divider"></div>
+            <div class="date">15 Сентября 2025</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="invitation animate">
+            <p class="invitation-text">
+                Дорогие друзья и родные!<br><br>
+                С огромной радостью приглашаем вас на нашу свадьбу, которая состоится 15 сентября 2025 года.<br><br>
+                В этот день мы хотим разделить с вами наше счастье и создать вместе незабываемые воспоминания.<br><br>
+                Ваше присутствие сделает этот день еще более особенным и наполненным любовью!
+            </p>
+            <div class="signature">Анна и Алексей</div>
+        </section>
+
+        <div class="countdown animate">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">дней</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">часов</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">минут</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">секунд</div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://placehold.co/600x800/FFFFF0/D4AF37?text=Фото+1" alt="Фото пары">
+            </div>
+            <div class="gallery-item">
+                <img src="https://placehold.co/600x800/FFFFF0/D4AF37?text=Фото+2" alt="Романтический момент">
+            </div>
+            <div class="gallery-item">
+                <img src="https://placehold.co/600x800/FFFFF0/D4AF37?text=Фото+3" alt="Помолвка">
+            </div>
+        </div>
+
+        <div class="details">
+            <div class="detail-item animate">
+                <div class="detail-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="detail-title">Церемония</div>
+                <p class="detail-text">15:00</p>
+                <p class="detail-text">Храм Святого Николая</p>
+                <p class="detail-text">ул. Церковная, 5, Москва</p>
+            </div>
+            <div class="detail-item animate">
+                <div class="detail-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <div class="detail-title">Банкет</div>
+                <p class="detail-text">17:30</p>
+                <p class="detail-text">Ресторан "Лазурный"</p>
+                <p class="detail-text">Набережная реки, 12, Москва</p>
+            </div>
+            <div class="detail-item animate">
+                <div class="detail-icon">
+                    <i class="fas fa-vest"></i>
+                </div>
+                <div class="detail-title">Дресс-код</div>
+                <p class="detail-text">Вечерние наряды</p>
+                <p class="detail-text">Палитра: золото, пастельные тона</p>
+                <p class="detail-text">Формальный стиль</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="rsvp-section">
+        <div class="container">
+            <h2 class="form-title">Подтвердите ваше присутствие</h2>
+            <p class="subtitle">Пожалуйста, ответьте до 1 августа 2025 года</p>
+            
+            <form class="rsvp-form animate" id="rsvpForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" required placeholder="Имя Фамилия">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required placeholder="ваш@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="guests">Количество гостей *</label>
+                    <select id="guests" required>
+                        <option value="" disabled selected>Выберите количество</option>
+                        <option value="1">1 человек</option>
+                        <option value="2">2 человека</option>
+                        <option value="3">3 человека</option>
+                        <option value="4">4 человека</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="attendance">Присутствие *</label>
+                    <select id="attendance" required>
+                        <option value="" disabled selected>Выберите вариант</option>
+                        <option value="yes">С радостью приду!</option>
+                        <option value="no">К сожалению, не смогу</option>
+                        <option value="maybe">Еще не уверен(а)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Пожелания или особые пожелания по питанию</label>
+                    <textarea id="message" rows="4" placeholder="Ваши пожелания..."></textarea>
+                </div>
+                
+                <button type="submit">Отправить ответ</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 class="footer-title">Мы ждём вас!</h2>
+            <div class="contacts">
+                <div class="contact-item">
+                    <div class="contact-name">По вопросам организации:</div>
+                    <p>+7 (999) 123-45-67</p>
+                    <p>wedding@anna-alex.ru</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-name">Контакты свидетелей:</div>
+                    <p>Мария: +7 (999) 765-43-21</p>
+                    <p>Дмитрий: +7 (999) 987-65-43</p>
+                </div>
+            </div>
+            
+            <div class="map"></div>
+            
+            <div class="copyright">
+                <p>С любовью, Анна и Алексей</p>
+                <p>© 2025 Наш особенный день</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Таймер обратного отсчета
+        const weddingDate = new Date('September 15, 2025 15:00:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = "<div class='subtitle'>Свадьба состоялась! Спасибо, что были с нами!</div>";
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            
+            requestAnimationFrame(updateCountdown);
+        }
+        
+        updateCountdown();
+        
+        // Обработка формы RSVP
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                guests: document.getElementById('guests').value,
+                attendance: document.getElementById('attendance').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Здесь должна быть отправка данных на сервер
+            // Для примера просто покажем сообщение
+            alert(`Спасибо, ${formData.name}! Ваш ответ успешно сохранён.`);
+            this.reset();
+        });
+        
+        // Анимация при скролле
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.detail-item, .gallery-item, .rsvp-form').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
